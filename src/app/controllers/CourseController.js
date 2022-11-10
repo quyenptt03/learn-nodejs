@@ -25,6 +25,21 @@ class NewsController {
       .then(() => res.redirect("/"))
       .catch(() => {});
   }
+
+  // GET /courses/:id/edit
+  edit(req, res, next) {
+    Course.findById(req.params.id)
+      .then((course) => {
+        res.render("courses/edit", { course: mongooseToObject(course) });
+      })
+      .catch((error) => next(error));
+  }
+
+  update(req, res, next) {
+    Course.findOneAndUpdate({ _id: req.params.id }, req.body)
+      .then(() => res.redirect("/me/stored/courses"))
+      .catch(next);
+  }
 }
 
 module.exports = new NewsController();
