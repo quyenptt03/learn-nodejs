@@ -22,7 +22,7 @@
       <option value="restore">Khôi phục</option>
       <option value="forceDelete">Xoá vĩnh viễn</option>
     </select>
-    <button class="btn btn-primary btn-sm btn-submit-action disabled">Áp dụng</button>
+    <button class="btn btn-primary btn-sm btn-submit-action" disabled>Áp dụng</button>
   </div>
 
   <table class="table mt-4">
@@ -154,19 +154,12 @@
       renderCheckAllSubmitBtn();
     });
 
-    submitActionBtn.on("submit", function(e) {
-      var isSubmittable = !submitActionBtn.hasClass("disabled");
-      if(!isSubmittable) {
-        e.preventDefault();
-      }
-    })
-
     function renderCheckAllSubmitBtn() {
       var checkedCount = $('input[name="courseIds[]"]:checked').length;
       if(checkedCount){
-        submitActionBtn.removeClass("disabled");
+        submitActionBtn.attr("disabled", false);
       } else {
-        submitActionBtn.addClass("disabled");
+        submitActionBtn.attr("disabled", true);
       }
     }
   });
